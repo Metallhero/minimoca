@@ -485,7 +485,7 @@
         this.Ready = function (err) {
             console.log("phoneReady");
             var maxSize = 5 * 1024 * 1024;
-            dbShell = window.openDatabase("MoCA", 2, "MoCA", maxSize);
+            dbShell = window.openDatabase("MoCAMini", 2, "MoCAMini", maxSize);
             console.log("db was opened");
 
 

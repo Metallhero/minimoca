@@ -3,7 +3,7 @@ self.addEventListener('message', function (e) {
     var data = e.data;
     var testId = data.testId;
     var maxSize = 5 * 1024 * 1024;
-    var wdb = openDatabaseSync("MoCA", 2, "MoCA", maxSize);
+    var wdb = openDatabaseSync("MoCAMini", 2, "MoCAMini", maxSize);
 
     var MocaTest = { TestId: testId, ResultList: [] };
     //get Query
