@@ -1,0 +1,230 @@
+﻿
+self.addEventListener('message', function (e) {
+    var data = e.data;
+
+    var maxSize = 5 * 1024 * 1024;
+    var wdb = openDatabaseSync("MoCA", 2, "MoCA", maxSize);
+
+    var MocaTest = { TestId: testId, ResultList: [] };
+    //get Query
+    var result = ExecuteSql("SELECT count(*) AS 'exist' FROM sqlite_master WHERE type='table' AND name='MocaTestClients'");
+    if (data.rows.item(0).exist)
+        return;
+
+    var tables = [
+                         "CREATE TABLE IF NOT EXISTS MocaComments(commentID INTEGER PRIMARY KEY,section TEXT,comment TEXT,caneva TEXT,testID INTEGER,testTypeID INTEGER)",
+                         "CREATE TABLE IF NOT EXISTS MocaTest(testID INTEGER PRIMARY KEY,testDate NUMERIC,clientID INTEGER,userID INTEGER,commentResult TEXT,imageResult TEXT)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestClients(clientID INTEGER PRIMARY KEY,name TEXT,dateOfBirth NUMERIC,gender INTEGER,education TEXT,chartNumber TEXT,physican TEXT)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestGroup(ID INTEGER PRIMARY KEY,Title TEXT)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestResults(resultID INTEGER PRIMARY KEY,testID INTEGER,testTypeID INTEGER,score INTEGER,timeTest NUMERIC,TbNote TEXT)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestResultsValues(resultValueID INTEGER PRIMARY KEY,resultID INTEGER,valueNumber INTEGER,valueResult INTEGER,valueOptional TEXT)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestType(testTypeID INTEGER PRIMARY KEY,testName TEXT,maxScore INTEGER,maxTime INTEGER)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestType_MocaGroup(GroupId INTEGER,TestTypeId INTEGER)",
+                         "CREATE TABLE IF NOT EXISTS MocaTestUsers(userID INTEGER PRIMARY KEY,name TEXT,occupation TEXT,username TEXT,password TEXT)",
+                         "CREATE TABLE IF NOT EXISTS MocaImage (ID INTEGER PRIMARY KEY, Data TEXT, testID INTEGER, testTypeID INTEGER)",
+                         "CREATE TABLE IF NOT EXISTS MocaResources (ID INTEGER PRIMARY KEY, Name TEXT, Value TEXT, Language TEXT, UpdateDate NUMERIC)"
+    ];
+    for (var i = 0; i < tables.length; i++) {
+        ExecuteSql[i];
+    }
+
+    var insertedData = [
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('abstraction_01','2','10')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('attention_01','1','10')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('attention_02','1','20')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('attention_03','3','5')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('delayedrecall_01','15','15')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('language_01','1','10')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('language_02','1','10')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('memory_01','5','20')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('naming_01','3','20')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('naming_02','5','15')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('naming_03','0','15')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('orientation_01','6','5')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('visuospatial_01','1','30')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('visuospatial_02','1','35')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('visuospatial_03','3','30')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('delayedrecall_02','0','3')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('delayedrecall_03','0','5')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('memory_02','0','20')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('attention_01_b','1','15')",
+         "INSERT into MocaTestType(testName,maxScore,maxTime) values('language_01_b','1','5')"
+    ];
+
+    for (var i = 0; i < insertedData.length; i++) {
+        ExecuteSql[i];
+    }
+
+    insertedData = [
+        "INSERT into MocaTestGroup(ID,Title) values('1','VISUOSPATIAL')",
+        "INSERT into MocaTestGroup(ID,Title) values('2','NAMING')",
+        "INSERT into MocaTestGroup(ID,Title) values('3','ATTENTION')",
+        "INSERT into MocaTestGroup(ID,Title) values('4','LANGUAGE')",
+        "INSERT into MocaTestGroup(ID,Title) values('5','ABSTRACTION')",
+        "INSERT into MocaTestGroup(ID,Title) values('6','DELAYED RECALL')",
+        "INSERT into MocaTestGroup(ID,Title) values('7','ORIENTATION')",
+        "INSERT into MocaTestGroup(ID,Title) values('8','MEMORY')"
+    ];
+    for (var i = 0; i < insertedData.length; i++) {
+        ExecuteSql[i];
+    }
+
+
+    ////////////////////////
+    var result = ExecuteSql("Select ID From MocaTestGroup");
+
+    for (var i = 0; i < result.rows.length; i++) {
+        var groupId = result.rows.item(i).ID;
+        var testResultVal = GetTestResultByGroup(testId, groupId);
+
+        if (testResultVal && testResultVal.testResult) {
+            for (var y = 0; y < testResultVal.testResult.length; y++) {
+                var testResult = testResultVal.testResult[y];
+                var testType = testResult.testTypeID;
+
+                if (testResult.testResultValues) {
+                    //sort by valueOptional
+                    testResult.testResultValues.sort(SortByValueOptional);
+
+
+                    var resultValues = [];
+                    for (var k = 0; k < testResult.testResultValues.length; k++) {
+                        var resultValue = testResult.testResultValues[k];
+                        resultValues.push({
+                            ValueOptional: resultValue.valueOptional,
+                            ValueResult: resultValue.valueResult == 1 ? true : false
+                        });
+                    }
+                    var resItem = {
+                        ResultID: testResult.resultID,
+                        TestType: testResult.testTypeID,
+                        Score: testResult.score,
+                        Time: testResult.timeTest,
+                        ResultValues: resultValues
+                    }
+                    var testTypesImg = JSON.parse(data.testTypesWithImg);
+
+                    if (testTypesImg.contains(resItem.TestType)) { //Images
+                        var mocaImage = ExecuteSql("SELECT * FROM MocaImage Where testID=" + testId + " AND testTypeID=" + resItem.TestType);
+                        if (mocaImage.rows.length > 0) {
+                            resItem.MocaImage = { Data: mocaImage.rows.item(0).Data };
+                        }
+                    }
+                    MocaTest.ResultList.push(resItem);
+
+                }
+
+            }
+        }
+    }
+    MocaTest.Patient = {};
+    //Patient info
+    var patientQueryRes = ExecuteSql("Select * From MocaTestClients Inner Join MocaTest ON MocaTestClients.clientID = MocaTest.clientID Where MocaTest.testID=" + testId);
+    var patient = patientQueryRes.rows.item(0);
+
+    MocaTest.Patient.name = patient.name;
+    MocaTest.Patient.chartNumber = patient.chartNumber;
+
+    if (isValidDate(patient.dateOfBirth)) {
+        MocaTest.Patient.dateOfBirth = patient.dateOfBirth;
+    }
+    MocaTest.Patient.education = patient.education;
+    MocaTest.Patient.gender = patient.gender;
+
+    //Administrator 
+    MocaTest.Administrator = {};
+    var adminQueryRes = ExecuteSql("Select * From MocaTestUsers  Inner Join MocaTest ON MocaTestUsers.userID = MocaTest.userID Where MocaTest.testID=" + testId);
+    var admin = adminQueryRes.rows.item(0);
+    MocaTest.Administrator.name = admin.name;
+
+    //Comments
+    var totalCommentQueryRes = ExecuteSql("Select * From MocaTest Where MocaTest.testID=" + testId);
+    var totalComment = totalCommentQueryRes.rows.item(0);
+    MocaTest.testDate = totalComment.testDate;
+    var totalCommentText = totalComment.commentResult;
+    var totalCommentImage = totalComment.imageResult;
+
+    var commentsQueryRes = ExecuteSql("Select * From MocaComments Where testID = " + testId);
+    MocaTest.CommentList = [];
+    for (var i = 0; i < commentsQueryRes.rows.length; i++) {
+        var comment = commentsQueryRes.rows.item(i);
+        if (comment.comment || comment.caneva) {
+            MocaTest.CommentList.push({ CommentText: comment.comment, CommentImage: comment.caneva, TestType: comment.testTypeID });
+        }
+    }
+    if (totalCommentText || totalCommentImage) {
+        MocaTest.CommentList.push({ CommentText: totalCommentText, CommentImage: totalCommentImage, TestType: 0 });
+    }
+
+    //Final serialize
+    var finalTestResult = JSON.stringify(MocaTest);
+
+    postMessage({ queryResult: finalTestResult });
+
+    function ExecuteSql(sql) {
+        var rs;
+        wdb.transaction(function (tx) {
+            rs = tx.executeSql(sql, []);
+        });
+        return rs;
+    }
+
+
+    function GetTestResultByGroup(testId, groupId) {
+        var results = ExecuteSql(SelectTestResultValuesByGroupIdAndTestIdQuery(testId, groupId));
+        var testResults = [];
+        if (results.rows.length > 0) {
+            var groupName = results.rows.item(0).GroupName;
+            var groupId = results.rows.item(0).GroupId;
+            for (var i = 0; i < results.rows.length; i++) {
+                var testResult = results.rows.item(i);
+
+                testResults.push(testResult);
+            }
+
+            var result = groupBy(testResults, function (item) {
+                return [item.resultID];
+            });
+            var tempResult = [];
+            for (var i = 0; i < result.length; i++) {
+                var testRes = result[i];
+
+                for (var j = 0; j < testRes.length; j++) {
+                    if (j == 0) {
+                        tempResult.push({ resultID: testRes[j].resultID, testTypeID: testRes[j].testTypeID, score: testRes[j].score, timeTest: testRes[j].timeTest, testResultValues: [] });
+                    }
+                    tempResult[tempResult.length - 1].testResultValues.push({ valueOptional: testRes[j].valueOptional, valueResult: testRes[j].valueResult });
+                }
+            }
+
+            var res = { "groupName": groupName, "groupId": groupId, "testResult": tempResult };
+
+            return res;
+        }
+
+
+    }
+
+}, false);
+
+function GetInsertQueries(insertedData) {
+
+    var insertedQueries = [];
+
+    $.each(insertedData.data, function (k, v) {
+        var values = [];
+
+        $.each(v, function (key, value) {
+            values.push("'" + value + "'");
+        });
+
+        var keys = $.map(v, function (item, i) {
+            return i;
+        });
+
+        var insertedQuery = "INSERT into " + insertedData.tableName + "(" + keys.join(',') + ")" + " values(" + values.join(',') + ")";
+        insertedQueries.push(insertedQuery);
+
+    });
+    return insertedQueries;
+};
