@@ -6,7 +6,7 @@ onmessage = function (event) {
     
     var wdb = openDatabaseSync('MoCA', "1.0", "", 1024 * 1024 * 5); //("MoCA", 2, "MoCA", maxSize);
 
-    var MocaTest = { TestId: testId, ResultList: [] };
+    var MocaTest = { TestId: testId, ResultList: [] }; 
     //get Query
     var result = ExecuteSql("Select ID From MocaTestGroup");
 
