@@ -1,12 +1,11 @@
 ﻿
-onmessage = function (event) {
+self.addEventListener('message', function (e) {
     var data = e.data;
-    var testId = data.testId; 
+    var testId = data.testId;
     var maxSize = 5 * 1024 * 1024;
-    
-    var wdb = openDatabaseSync('MoCA', "1.0", "", 1024 * 1024 * 5); //("MoCA", 2, "MoCA", maxSize);
+    var wdb = openDatabaseSync("MoCA", 2, "MoCA", maxSize);
 
-    var MocaTest = { TestId: testId, ResultList: [] }; 
+    var MocaTest = { TestId: testId, ResultList: [] };
     //get Query
     var result = ExecuteSql("Select ID From MocaTestGroup");
 
@@ -61,7 +60,7 @@ onmessage = function (event) {
 
     MocaTest.Patient.name = patient.name;
     MocaTest.Patient.chartNumber = patient.chartNumber;
-   
+
     if (isValidDate(patient.dateOfBirth)) {
         MocaTest.Patient.dateOfBirth = patient.dateOfBirth;
     }
@@ -80,7 +79,7 @@ onmessage = function (event) {
     MocaTest.testDate = totalComment.testDate;
     var totalCommentText = totalComment.commentResult;
     var totalCommentImage = totalComment.imageResult;
-   
+
     var commentsQueryRes = ExecuteSql("Select * From MocaComments Where testID = " + testId);
     MocaTest.CommentList = [];
     for (var i = 0; i < commentsQueryRes.rows.length; i++) {
@@ -92,7 +91,7 @@ onmessage = function (event) {
     if (totalCommentText || totalCommentImage) {
         MocaTest.CommentList.push({ CommentText: totalCommentText, CommentImage: totalCommentImage, TestType: 0 });
     }
-    
+
     //Final serialize
     var finalTestResult = JSON.stringify(MocaTest);
 
@@ -135,14 +134,14 @@ onmessage = function (event) {
             }
 
             var res = { "groupName": groupName, "groupId": groupId, "testResult": tempResult };
-            
+
             return res;
         }
 
 
     }
 
-};
+}, false);
 
 var SelectTestResultValuesByGroupIdAndTestIdQuery = function (testId, groupId) {
     return "Select MocaTestResultsValues.valueResult, MocaTestResultsValues.valueOptional,  MocaTestResults.resultID, MocaTestGroup.Title as 'GroupName', MocaTestGroup.ID as 'GroupId', MocaTestResults.testID,MocaTestResults.testTypeID,MocaTestResults.score,MocaTestResults.timeTest From MocaTestResults inner join MocaTestType_MocaGroup On MocaTestResults.testTypeID = MocaTestType_MocaGroup.testTypeId inner join MocaTestGroup On MocaTestType_MocaGroup.GroupId =  MocaTestGroup.ID inner join MocaTestResultsValues on MocaTestResults.resultID= MocaTestResultsValues.resultID Where GroupId = " + groupId + " and MocaTestResults.testID=" + testId;
