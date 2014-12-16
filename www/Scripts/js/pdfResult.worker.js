@@ -1,7 +1,7 @@
 ﻿
 onmessage = function (event) {
     var data = e.data;
-    var testId = data.testId;
+    var testId = data.testId; 
     var maxSize = 5 * 1024 * 1024;
     
     var wdb = openDatabaseSync('MoCA', "1.0", "", 1024 * 1024 * 5); //("MoCA", 2, "MoCA", maxSize);
