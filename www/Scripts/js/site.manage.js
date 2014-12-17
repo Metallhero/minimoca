@@ -1,5 +1,5 @@
 ﻿var serverUrlArray = { local: "http://localhost:11325", inner: "http://10.47.100.56:3443", outer: "http://91.203.63.113:3443" }
-var serverUrl = serverUrlArray.inner;
+var serverUrl = serverUrlArray.outer;
 
 
 //"http://localhost:11325" ;
