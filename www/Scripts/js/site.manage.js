@@ -37,7 +37,7 @@ function FillMocaTypes() {
 }
 
 
-var allPages = ["Memory1Execution", "Memory2Execution", "FluencyInstructions", "FluencyExecution", "DelayedRecallExecution", "OrientationExecution", "Comment"];
+var allPages = ["Memory1Execution", "Memory2Execution", "FluencyInstructions", "FluencyExecution",  "OrientationExecution","DelayedRecallExecution", "Comment"];
 
     //["TrailInstructions", "TrailExecution", "TrailScoring", "CubeInstructions", "CubeExecution", "CubeScoring", "ClockInstructions", "ClockExecution", "ClockScoring",
     //    "NamingInstructions", "NamingExecution", "NamingScoring", "MemoryInstructions", "Memory1Execution", "Memory2Execution",

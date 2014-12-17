@@ -84,7 +84,7 @@
             </ul>
         </div>
     </div>
-    <div class="content">
+    <div class="">
         <div class="Wrap" id="Wrap">
             <table id="moca-table" style="border-spacing: 0;border: none;font-size: 11px;width: 850px;margin: 15px auto;background: #fff; ">
                 <thead>
@@ -159,9 +159,12 @@
                             </table>
                         </td>
                         <td colspan="1" style="border: none;padding: 0.1rem 0;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;border-bottom:0;border-right:0;">
-                            <label class="summTime_8_18 "></label>
+                            <div style="width: 100%;"><span style="background: #000;width: 44px;color: #fff;font-size: 0.7em;text-transform: uppercase;padding: 5px 4px;position: absolute;top: 0px;left: -3px;" data-resource='{"name":"Time","attribute":"html"}'><!--Time--></span></div>
+                               <label class="summTime_8_18 "></label>
                         </td>
-                        <td colspan="1" class="sum_8" id="summResult_8_18" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: middle;position: relative;text-align: left;font-size: 11px;border-bottom:0;"> <span data-resource='{"name":"NoPoints","attribute":"html"}'><!--No<br />points--></span></td>
+                        <td colspan="1" class="sum_8" id="summResult_8_18" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: middle;position: relative;text-align: left;font-size: 11px;border-bottom:0;"> 
+                            <div style=""><span style="background: #000;color: #fff; text-transform: uppercase;padding: 5px 4px;position: absolute;top: 0px;left: -3px;-webkit-border-radius: 0 12px 0 0;border-radius: 0 12px 0 0; -moz-border-radius:0 12px 0 0;" data-resource='{"name":"Points","attribute":"html"}'><!--Points--></span></div>
+                        <span data-resource='{"name":"NoPoints","attribute":"html"}'><!--No<br />points--></span></td>
                     </tr>
                     <!--     END MEMORY     -->
  
@@ -182,11 +185,41 @@
                         <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;border-bottom:0;"><span id="summResult_7" class="sum_4"></span>/1</td>
                     </tr>
                     <!--     END LANGUAGE   -->
- 
+                    <!--     ORIENTATION    -->
+                    <tr style="border: none;padding: 0.1rem 0.2rem;">
+                        <td colspan="5" style="border: none; padding: 0.1rem 0.2rem 10px 0.1rem;  white-space: nowrap; border-style: solid; vertical-align: top; position: relative; border-right: 0; -webkit-border-radius: 0 0 0 1px; b rder-radius: 0 0 0 1px; - oz-border-radius: 0 0 0 1px;">
+                            <div style="position: relative;"><span style="background: #000;color: #fff;font-size: 13px;font-weight:bold;text-transform: uppercase;padding: 8px 10px;position: absolute;top: -2px;left: -4px;-webkit-border-radius: 0 0 0 12px;border-radius: 0 0 0 12px; -moz-border-radius:0 0 0 12px;" data-resource='{"name":"OrientationTitle","attribute":"html"}'><!--Orientation--></span></div>
+                            <div style="margin: 5px 0 0 135px;">
+                                <span style="display: inline-block;margin: 0 20px;">
+                                    <label style="font-size: 1.1em;">[ <span id="test_12_1"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Date","attribute":"html"}'>&nbsp;<!--Date--></span>
+                                </span>
+                                <span style="display: inline-block;margin: 0 20px;">
+                                    <label style="font-size: 1.1em;">[ <span id="test_12_2"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Month","attribute":"html"}'>&nbsp;<!--Month--></span>
+                                </span>
+                                <span style="display: inline-block;margin: 0 20px;">
+                                    <label style="font-size: 1.1em;">[ <span id="test_12_3"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Year","attribute":"html"}'>&nbsp;<!--Year--></span>
+                                </span>
+                                <span style="display: inline-block;margin: 0 20px;">
+                                    <label style="font-size: 1.1em;">[ <span id="test_12_4"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Day","attribute":"html"}'>&nbsp;<!--Day--></span>
+                                </span>
+                                <span style="display: inline-block;margin: 0 20px;">
+                                    <label style="font-size: 1.1em;">[ <span id="test_12_5"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Place","attribute":"html"}'>&nbsp;<!--Place--></span>
+                                </span>
+                                <span style="display: inline-block;margin: 0 20px;">
+                                    <label style="font-size: 1.1em;">[ <span id="test_12_6"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"City","attribute":"html"}'>&nbsp;<!--City--></span>
+                                </span>
+                            </div>
+                        </td>
+                        <td colspan="1" style="border: none;padding: 0.1rem 0;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;border-right:0;">
+                            <label class="summTime_12" id="timeResult"></label>
+                        </td>
+                        <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;"><span id="summResult_12" class="sum_7"></span>/6</td>
+                    </tr>
+                    <!--     END ORIENTATION    -->
                     <!--     DELAYED RECALL     -->
                     <tr style="border: none;padding: 0.1rem 0.2rem;">
-                        <td colspan="5" style="border: none;padding: 0;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-bottom:0;border-right:0;">
-                            <div style="position: relative;"><span style="background: #000;color: #fff;font-size: 13px;font-weight:bold;text-transform: uppercase;padding: 5px 10px;position: absolute;top: -2px;left: -4px;" data-resource='{"name":"DelayedRecallTitle","attribute":"html"}'><!--Delayed recall--></span></div>
+                        <td colspan="5" style="border: none;padding: 0;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-right:0;">
+                            <div style="position: relative;"><span style="background: #000;color: #fff;font-size: 13px;font-weight:bold;text-transform: uppercase;padding: 5px 10px;position: absolute;top: -2px;left: -3px;" data-resource='{"name":"DelayedRecallTitle","attribute":"html"}'><!--Delayed recall--></span></div>
                             <div style="margin: 0 0 0 135px;">
                                 <div style="position: relative;"><span style="position: absolute;top: 40px;left: -120px;text-transform: uppercase;font-size: 18px;font-weight: 700;"></span></div>
                                 <table id="memory-table" style="border-collapse: collapse; border-spacing: 0; vertical-align: top; width: 100%; ">
@@ -223,79 +256,22 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!--<table id="memory-table" style="border-collapse: collapse; border-spacing: 0; vertical-align: top; width: 100%; ">
-                                    <tbody>
-                                        <tr style="border: none;padding: 0.1rem 1rem;">
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;text-align:right;">Has to recall words<br />WITH NO CUE</td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;">FACE<br /><label style="font-size: 1.1em;">[ <span id="test_5_1"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;">VELVET<br /><label style="font-size: 1.1em;">[ <span id="test_5_2"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;">CHURCH<br /><label style="font-size: 1.1em;">[ <span id="test_5_3"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;">DAISY<br /><label style="font-size: 1.1em;">[ <span id="test_5_4"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-right:none;font-size:1.2em;">RED<br /><label style="font-size: 1.1em;">[ <span id="test_5_5"></span> ]</label></td>
-                                        </tr>
-                                        <tr style="border: none;padding: 0.1rem 1rem;">
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;text-align:right;">Category cue</td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_6"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_7"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_8"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_9"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-right:none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_10"></span> ]</label></td>
-                                        </tr>
-                                        <tr style="border: none;padding: 0.1rem 1rem;">
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-bottom:none;font-size:1.2em;text-align:right;">Multiple choice cue</td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-bottom:none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_11"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-bottom:none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_12"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-bottom:none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_13"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-bottom:none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_14"></span> ]</label></td>
-                                            <td style="border: 2px solid #000;padding: 0.1rem 1rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-top: none;border-bottom:none;border-right:none;font-size:1.2em;"><label style="font-size: 1.1em;">[ <span id="test_5_15"></span> ]</label></td>
-                                        </tr>
-                                    </tbody>
-                                </table>-->
+                              
                             </div>
                         </td>
                         <td colspan="1" style="border: none;padding: 0.1rem 0;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;border-bottom:0;border-right:0;">
                             <label class="summTime_5" id="timeResult"></label>
                         </td>
-                        <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;border-bottom:0;"><span id="summResult_5" class="sum_6"></span>/5</td>
+                        <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;"><span id="summResult_5" class="sum_6"></span>/5</td>
                     </tr>
                     <!--     END DELAYED RECALL     -->
-                    <!--     ORIENTATION    -->
-                    <tr style="border: none;padding: 0.1rem 0.2rem;">
-                        <td colspan="5" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-right:0;-webkit-border-radius: 0 0 0 12px;border-radius: 0 0 0 12px; -moz-border-radius:0 0 0 12px;">
-                            <div style="position: relative;"><span style="background: #000;color: #fff;font-size: 13px;font-weight:bold;text-transform: uppercase;padding: 8px 10px;position: absolute;top: -2px;left: -4px;-webkit-border-radius: 0 0 0 12px;border-radius: 0 0 0 12px; -moz-border-radius:0 0 0 12px;" data-resource='{"name":"OrientationTitle","attribute":"html"}'><!--Orientation--></span></div>
-                            <div style="margin: 5px 0 0 135px;">
-                                <span style="display: inline-block;margin: 0 20px;">
-                                    <label style="font-size: 1.1em;">[ <span id="test_12_1"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Date","attribute":"html"}'>&nbsp;<!--Date--></span>
-                                </span>
-                                <span style="display: inline-block;margin: 0 20px;">
-                                    <label style="font-size: 1.1em;">[ <span id="test_12_2"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Month","attribute":"html"}'>&nbsp;<!--Month--></span>
-                                </span>
-                                <span style="display: inline-block;margin: 0 20px;">
-                                    <label style="font-size: 1.1em;">[ <span id="test_12_3"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Year","attribute":"html"}'>&nbsp;<!--Year--></span>
-                                </span>
-                                <span style="display: inline-block;margin: 0 20px;">
-                                    <label style="font-size: 1.1em;">[ <span id="test_12_4"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Day","attribute":"html"}'>&nbsp;<!--Day--></span>
-                                </span>
-                                <span style="display: inline-block;margin: 0 20px;">
-                                    <label style="font-size: 1.1em;">[ <span id="test_12_5"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"Place","attribute":"html"}'>&nbsp;<!--Place--></span>
-                                </span>
-                                <span style="display: inline-block;margin: 0 20px;">
-                                    <label style="font-size: 1.1em;">[ <span id="test_12_6"></span> ]</label><span style="font-size:1.2em;" data-resource='{"name":"City","attribute":"html"}'>&nbsp;<!--City--></span>
-                                </span>
-                            </div>
-                        </td>
-                        <td colspan="1" style="border: none;padding: 0.1rem 0;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;border-right:0;">
-                            <label class="summTime_12" id="timeResult"></label>
-                        </td>
-                        <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: bottom;position: relative;text-align: center;font-size: 15px;padding-bottom: 10px;"><span id="summResult_12" class="sum_7"></span>/6</td>
-                    </tr>
-                    <!--     END ORIENTATION    -->
+  
                 </tbody>
                 <tfoot>
                     <tr style="border: none;padding: 0.1rem 0.2rem;">
                         <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;vertical-align: top;position: relative;"><span style="font-weight: 700;font-size:1.1em;">© Z.Nasreddine MD</span><br /><span data-resource='{"name":"AdministeredBy","attribute":"html"}'> <!--Administered by--></span>: <span id="MDname"></span></td>
                         <td colspan="1" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;vertical-align: top;position: relative;"><span style="font-weight: 700;font-size:1.2em;">www.mocatest.org</span></td>
-                        <td colspan="2" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;vertical-align: top;position: relative;font-size:1.2em;text-align:right;"><span style="font-weight:bold; font-size:16px; color:red"><span data-resource='{"name":"MIS","attribute":"html"}'><!--MIS--></span>: <span class="summMIS"></span>/15</span><br /><label><span data-resource='{"name":"NormalMoreResult","attribute":"html"}'><!-->Normal ≥ --></span> 26 / 30 <br /><span style="font-size:12px;" data-resource='{"name":"AddPointResult","attribute":"html"}'><!--Add 1 point if ≤ 12 yr edu--></span></label></td>
+                        <td colspan="2" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;vertical-align: top;position: relative;font-size:1.2em;text-align:right;"><span style="font-weight:bold; font-size:16px; color:red"><span data-resource='{"name":"MIS","attribute":"html"}'><!--MIS--></span>: <span class="summMIS"></span>/15</span><br /><label><span data-resource='{"name":"NormalMoreResult","attribute":"html"}'><!-->Normal ≥ --></span> 10 / 12 <br /><span style="font-size:12px;" data-resource='{"name":"AddPointResult","attribute":"html"}'><!--Add 1 point if ≤ 12 yr edu--></span></label></td>
                         <td colspan="2" style="border: none;padding: 0.1rem 0.2rem;white-space: nowrap;border-style: solid;vertical-align: top;position: relative;border-right: none;font-size: 15px;border-top:0;-webkit-border-radius: 0 0 0 12px;border-radius: 0 0 0 12px; -moz-border-radius:0 0 0 12px;">
                             <label> <b ><span data-resource='{"name":"TotalTime","attribute":"html"}'><!--Total time--></span></b> <br /><b><span data-resource='{"name":"Total","attribute":"html"}'><!--Total--></span></b></label>
                         </td>
@@ -323,7 +299,7 @@
                         </div>
                         <div class="" style="text-align: right;">
                             <a href="#" style="    padding: 5px 10px; margin: 10px 0;   display: inline-block;    font-size: 16px;    text-decoration: none;    color: #fff; background: #000;
-    font-weight: bold;    text-transform: uppercase;" onclick="window.history.back();return false;" data-resource='{"name":"Back","attribute":"html"}'><!--Back--></a>
+                                font-weight: bold;    text-transform: uppercase;" onclick="window.history.back();return false;" data-resource='{"name":"Back","attribute":"html"}'><!--Back--></a>
                         </div>
                     </td>
                 </tr>
